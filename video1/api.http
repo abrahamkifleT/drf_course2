@@ -36,8 +36,8 @@ POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "admin",
-    "password": "test"
+    "username" : "avikifle",
+    "password": "12345"
 }
 
 ###
@@ -49,6 +49,12 @@ Content-Type: application/json
     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2NTI2NzYzNiwiaWF0IjoxNzY1MTgxMjM2LCJqdGkiOiJiODI1MzcyZDI0Njc0YjdlYmQ3ODUzZjQzMjVkMzMyMyIsInVzZXJfaWQiOiIxIn0.7OwngYoIandmySfRCDZpmnCVUiLG3Bfi8VM2mV-XMYs"
 }
 
+###
 
+GET http://localhost:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1NTM2NjAyLCJpYXQiOjE3NjU1MzYzMDIsImp0aSI6ImY3OWQ0ZTkwZWU5YjQyY2Q5ZDc2ZDQ1ZTZjMmIyMzE3IiwidXNlcl9pZCI6IjIifQ.rsOegN-wOqyWYIbwdriRq6rtUCUrJS2P00gV3ffZ_I4
 
+###
+GET http://localhost:8000/orders/40ef9cbc-b915-42e9-86d9-0b68eba65fa6 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1NTM2NjAyLCJpYXQiOjE3NjU1MzYzMDIsImp0aSI6ImY3OWQ0ZTkwZWU5YjQyY2Q5ZDc2ZDQ1ZTZjMmIyMzE3IiwidXNlcl9pZCI6IjIifQ.rsOegN-wOqyWYIbwdriRq6rtUCUrJS2P00gV3ffZ_I4
 
