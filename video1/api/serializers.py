@@ -34,6 +34,23 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'item_subtotal',
             'product_stock',
             )
+        
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class OrderItemCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = OrderItem
+            fields = (
+                'product',
+                'quantity'
+            )
+    items = OrderItemCreateSerializer(many=True)
+    class Meta:
+        model = Order
+        fields = (
+            'user',
+            'status',
+            'items',
+        )
 
         
 class OrderSerializer(serializers.ModelSerializer):  

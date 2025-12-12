@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from .filter import InStockFilterBackend, OrderFilter, ProductFilter
 from .models import Order, OrderItem, Product
 from .serializers import (OrderItemSerializer, OrderSerializer,
-                          ProductInfoSerializer, ProductSerializer)
+                          ProductInfoSerializer, ProductSerializer, OrderCreateSerializer)
 
 
 class ProductListCreateApiView(generics.ListCreateAPIView):
@@ -58,6 +58,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated] 
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
+    
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return OrderCreateSerializer
+        return super().get_serializer_class()
     
     def get_queryset(self):
         qs = super().get_queryset()
