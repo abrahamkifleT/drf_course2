@@ -65,6 +65,10 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             'status',
             'items',
         )
+        
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
 
         
 class OrderSerializer(serializers.ModelSerializer):  
