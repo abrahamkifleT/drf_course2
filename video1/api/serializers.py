@@ -64,10 +64,11 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         orderitem_data = validated_data.pop('items')
-        order = Order.objects.create(**validated_data)
         
-        for item in orderitem_data:
-            OrderItem.objects.create(order=order, **item)
+        with transaction.atomic:
+            order = Order.objects.create(**validated_data) 
+            for item in orderitem_data:
+                OrderItem.objects.create(order=order, **item)
             
         return order
     
