@@ -1,6 +1,6 @@
+from django.db import transaction
 from rest_framework import serializers
 from .models import Product, Order, OrderItem
-from rest_framework.response import Response
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,14 +49,16 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     
     def update(self, instance, validated_data):
         orderitem_data = validated_data.pop('items')
-        instance = super().update(instance, validated_data)
         
-        if orderitem_data is not None:
-            #Clear existing items (Optional, depending on requirment)
-            instance.items.all().delete()
-            # Recrate items with the updated data
-            for item in orderitem_data:
-             OrderItem.objects.create(order=instance, **item)
+        with transaction.atomic():
+            instance = super().update(instance, validated_data)
+            
+            if orderitem_data is not None:
+                #Clear existing items (Optional, depending on requirment)
+                instance.items.all().delete()
+                # Recrate items with the updated data
+                for item in orderitem_data:
+                    OrderItem.objects.create(order=instance, **item)
              
         return instance        
     
